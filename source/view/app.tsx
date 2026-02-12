@@ -1,7 +1,4 @@
-import {
-  Playground,
-  type Props as PlaygroundProps,
-} from "@/component/playground";
+import { Playground } from "@/component/playground";
 import { StickyNote } from "@/component/sticky-note";
 import { useNotes } from "@/context/notes/hook";
 import {
@@ -10,27 +7,9 @@ import {
   MeasuringStrategy,
   type DndContextProps,
 } from "@dnd-kit/core";
-import { useState } from "react";
 
 export default function App() {
-  const [isAdding, setAdding] = useState(false);
-
   const notes = useNotes();
-
-  const handleClick: PlaygroundProps["onClick"] = (event) => {
-    if (isAdding) {
-      notes.add(event.clientX, event.clientY);
-      setAdding(false);
-    }
-  };
-
-  const handleAddNote = () => {
-    setAdding(true);
-  };
-
-  const handleClearNotes = () => {
-    notes.clear();
-  };
 
   const handleNoteResize = (id: string, width: number, height: number) => {
     notes.resize(id, width, height);
@@ -41,25 +20,7 @@ export default function App() {
   };
 
   return (
-    <Playground isAdding={isAdding} onClick={handleClick}>
-      <div className="toolbar">
-        <button
-          onClick={handleClearNotes}
-          type="button"
-          className="button -primary"
-        >
-          Clear notes
-        </button>
-
-        <button
-          onClick={handleAddNote}
-          type="button"
-          className="button -primary"
-        >
-          Add note
-        </button>
-      </div>
-
+    <Playground>
       <DndContext
         collisionDetection={closestCenter}
         onDragEnd={handleDragEnd}
@@ -71,15 +32,15 @@ export default function App() {
       >
         {notes.list.map((note) => (
           <StickyNote
-            id={note.id}
-            key={note.id}
-            content={note.content}
             color={note.color}
+            content={note.content}
+            height={note.height}
+            id={note.id}
+            isEditing={note.editing}
+            key={note.id}
+            width={note.width}
             x={note.x}
             y={note.y}
-            width={note.width}
-            isEditing={note.editing}
-            height={note.height}
             onResize={handleNoteResize}
             updateNode={(id, payload) => {
               notes.update(id, payload);

@@ -26,3 +26,12 @@ export const NotesContext = createContext<Context>({
 export function useNotes(): Context {
   return useContext(NotesContext);
 }
+
+export function useToolbarNotes(): Pick<Context, "clear" | "add"> {
+  const ctx = useContext(NotesContext);
+
+  return {
+    clear: ctx.clear,
+    add: ctx.add,
+  };
+}

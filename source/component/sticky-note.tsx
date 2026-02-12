@@ -4,13 +4,18 @@ import { useState, type PointerEventHandler } from "react";
 import { CSS } from "@dnd-kit/utilities";
 import { clamp } from "@/helper/number";
 import type { StickyNote } from "@/model/sticky-note";
+import {
+  NOTE_DEFAULT_COLOR,
+  NOTE_DEFAULT_HEIGHT,
+  NOTE_DEFAULT_WIDTH,
+} from "@/constants";
 
 export interface Props {
   color?: string;
   width?: number;
   height?: number;
-  x?: number;
-  y?: number;
+  x: number;
+  y: number;
   id: string;
   content?: string;
   isEditing?: boolean;
@@ -20,47 +25,47 @@ export interface Props {
 
 export function StickyNote({
   id,
-  width = 250,
-  height = 200,
-  x = 10,
-  y = 10,
-  color = "neutral",
+  color = NOTE_DEFAULT_COLOR,
+  width = NOTE_DEFAULT_WIDTH,
+  height = NOTE_DEFAULT_HEIGHT,
+  x,
+  y,
   onResize,
   content,
   isEditing,
   updateNode,
 }: Props) {
+  const [isResizing, setIsResizing] = useState(false);
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id,
     disabled: isEditing,
   });
 
-  const [isResizing, setIsResizing] = useState(false);
-
   const handlePointerDown: PointerEventHandler<HTMLDivElement> = (e) => {
     e.stopPropagation();
     setIsResizing(true);
 
-    const startX = e.clientX;
-    const startY = e.clientY;
-    const startWidth = width;
-    const startHeight = height;
-
     const handlePointerMove = (event: MouseEvent) => {
-      const newWidth = startWidth + (event.clientX - startX);
-      const newHeight = startHeight + (event.clientY - startY);
+      const newWidth = width + (event.clientX - e.clientX);
+      const newHeight = height + (event.clientY - e.clientY);
 
-      onResize(id, clamp(newWidth, 100, 600), clamp(newHeight, 80, 500));
+      onResize(
+        //
+        id,
+        clamp(newWidth, 100, 600),
+        clamp(newHeight, 80, 500),
+      );
     };
 
     const handlePointerUp = () => {
       setIsResizing(false);
-      window.removeEventListener("pointermove", handlePointerMove);
-      window.removeEventListener("pointerup", handlePointerUp);
+
+      removeEventListener("pointermove", handlePointerMove);
+      removeEventListener("pointerup", handlePointerUp);
     };
 
-    window.addEventListener("pointermove", handlePointerMove);
-    window.addEventListener("pointerup", handlePointerUp);
+    addEventListener("pointermove", handlePointerMove);
+    addEventListener("pointerup", handlePointerUp);
   };
 
   const [input, setInput] = useState(content);
