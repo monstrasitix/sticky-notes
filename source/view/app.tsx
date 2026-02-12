@@ -1,5 +1,6 @@
 import { Playground } from "@/component/playground";
 import { StickyNote } from "@/component/sticky-note";
+import { Trash } from "@/component/trash";
 import { useNotes } from "@/context/notes/hook";
 import {
   closestCenter,
@@ -15,8 +16,20 @@ export default function App() {
     notes.resize(id, width, height);
   };
 
-  const handleDragEnd: DndContextProps["onDragEnd"] = ({ active, delta }) => {
-    notes.move(active.id.toString(), delta.x, delta.y);
+  const handleDragEnd: DndContextProps["onDragEnd"] = ({
+    active,
+    delta,
+    over,
+  }) => {
+    if (
+      over &&
+      over.data &&
+      over.data.current?.accepts.includes(active.data.current?.type)
+    ) {
+      console.log("Delete");
+    } else {
+      notes.move(active.id.toString(), delta.x, delta.y);
+    }
   };
 
   return (

@@ -6,4 +6,15 @@
   &.-is-adding {
     cursor: crosshair;
   }
+
+  &-bin {
+    position: absolute;
+    height: 100px;
+    background-color: rgba(0, 0, 0, 0.2);
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 4rem;
+    border-radius: 5px;
+  }
 }

@@ -39,6 +39,9 @@ export function StickyNote({
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id,
     disabled: isEditing,
+    data: {
+      type: "note",
+    },
   });
 
   const handlePointerDown: PointerEventHandler<HTMLDivElement> = (e) => {
