@@ -1,6 +1,11 @@
+@use "../abstract/font";
+@use "../abstract/color";
+@use "../abstract/spacing";
+
 .sticky-note {
-  font-family: sans-serif;
-  font-size: 0.9rem;
+  font-size: font.$note-size;
+  font-family: font.$note-family;
+
   position: absolute;
   box-shadow: 5px 5px 7px gray;
   user-select: none;
@@ -8,20 +13,9 @@
   z-index: 5;
   position: relative;
 
-  &.-color-neutral {
-    background-color: silver;
-    color: white;
-  }
-
-  &.-color-blue {
-    background-color: dodgerblue;
-    color: white;
-  }
-
-  &.-color-red {
-    background-color: crimson;
-    color: white;
-  }
+  color: color.$note-color;
+  background-color: color.$note-background;
+  border: 1px solid color.$note-border;
 
   &-content {
     padding: 2em;
@@ -29,18 +23,18 @@
   }
 
   &-input {
-    padding: 2em;
+    padding: spacing.$em-2;
     outline: none;
     border: none;
     width: 100%;
     height: 100%;
     background-color: transparent;
-    color: white;
     white-space: pre-wrap;
   }
 
   &-content,
   &-input {
+    color: color.$note-color;
     display: flex;
     align-items: center;
     resize: none;
@@ -55,15 +49,22 @@
     position: absolute;
     bottom: 0;
     right: 0;
+    padding: 1rem;
+
+    button + button {
+      margin-left: 1rem;
+    }
   }
 
   &-resize {
+    $size: 20px;
+    width: $size;
+    height: $size;
+
     display: none;
     position: absolute;
     bottom: 0;
     right: 0;
-    width: 20px;
-    height: 20px;
     cursor: nwse-resize;
     background-color: rgba(0, 0, 0, 0.2);
   }

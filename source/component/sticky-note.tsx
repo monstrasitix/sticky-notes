@@ -106,7 +106,7 @@ export function StickyNote({
             }}
           />
 
-          <div className="sticky-note-form">
+          <div className="sticky-note-form" style={{ fontSize: "5px" }}>
             <button
               onClick={() => {
                 updateNode(id, { editing: false, content });

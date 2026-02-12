@@ -1,9 +1,11 @@
+@use "../abstract/spacing";
+
 .toolbar {
   position: absolute;
-  left: 3rem;
-  top: 3rem;
+  left: spacing.$rem-4;
+  top: spacing.$rem-4;
 
   & > * + * {
-    margin-left: 1rem;
+    margin-left: spacing.$rem-1;
   }
 }

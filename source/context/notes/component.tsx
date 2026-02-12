@@ -20,7 +20,7 @@ export function NotesProvider({ children }: Props) {
           color: "blue",
           width: 200,
           height: 200,
-          content: "Something new",
+          content: "Content",
         },
       ];
 

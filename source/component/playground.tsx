@@ -29,7 +29,7 @@ export function Playground({ children }: PropsWithChildren) {
     >
       <div className="toolbar">
         <button onClick={handleClear} type="button" className="button -primary">
-          Clear notes
+          Clear
         </button>
 
         <button
