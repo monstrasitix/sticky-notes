@@ -1,0 +1,74 @@
+.sticky-note {
+  font-family: sans-serif;
+  font-size: 0.9rem;
+  position: absolute;
+  box-shadow: 5px 5px 7px gray;
+  user-select: none;
+  cursor: grab;
+  z-index: 5;
+  position: relative;
+
+  &.-color-neutral {
+    background-color: silver;
+    color: white;
+  }
+
+  &.-color-blue {
+    background-color: dodgerblue;
+    color: white;
+  }
+
+  &.-color-red {
+    background-color: crimson;
+    color: white;
+  }
+
+  &-content {
+    padding: 2em;
+    height: 100%;
+  }
+
+  &-input {
+    padding: 2em;
+    outline: none;
+    border: none;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    color: white;
+    white-space: pre-wrap;
+  }
+
+  &-content,
+  &-input {
+    display: flex;
+    align-items: center;
+    resize: none;
+    justify-content: center;
+    height: 100%;
+
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  &-form {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+
+  &-resize {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    cursor: nwse-resize;
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+
+  &:hover &-resize {
+    display: block;
+  }
+}

@@ -1,0 +1,24 @@
+.button {
+  font-size: 0.9rem;
+  font-family: sans-serif;
+  line-height: inherit;
+
+  padding: 1em 1.5em;
+
+  border-radius: 5px;
+  border: 0;
+
+  outline: none;
+  cursor: pointer;
+
+  text-align: center;
+  vertical-align: middle;
+
+  display: inline-block;
+  white-space: nowrap;
+
+  &.-primary {
+    color: white;
+    background-color: dodgerblue;
+  }
+}
