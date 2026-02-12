@@ -1,6 +1,5 @@
 import { Playground } from "@/component/playground";
 import { StickyNote } from "@/component/sticky-note";
-import { Trash } from "@/component/trash";
 import { useNotes } from "@/context/notes/hook";
 import {
   closestCenter,
